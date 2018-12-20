@@ -1,15 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-const Button = ({ children }) => {
-  const { buttonStyle, textStyle } = styles;
-  return (
-    <TouchableOpacity style={buttonStyle}>
-      <Text style={textStyle}>{children}</Text>
-    </TouchableOpacity>
-  );
-};
-
 const styles = {
   buttonStyle: {
     flex: 1,
@@ -31,4 +22,13 @@ const styles = {
   },
 };
 
-export default Button;
+const Button = ({ onPress, children }) => {
+  const { buttonStyle, textStyle } = styles;
+  return (
+    <TouchableOpacity style={buttonStyle} onPress={onPress}>
+      <Text style={textStyle}>{children}</Text>
+    </TouchableOpacity>
+  );
+};
+
+export { Button };

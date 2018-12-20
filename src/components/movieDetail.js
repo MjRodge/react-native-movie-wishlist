@@ -1,8 +1,6 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
-import Card from './card';
-import CardSection from './cardSection';
-import Button from './button';
+import { Card, CardSection, Button } from './common';
 
 const MovieDetail = ({ movie }) => {
   const {
