@@ -10,11 +10,11 @@ import MovieList from './components/movieList';
 
 class App extends Component {
   render() {
-    const reduxStore = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+    const reduxStore = createStore(reducers, applyMiddleware(ReduxThunk));
     return (
       <Provider store={reduxStore}>
         <View style={{ flex: 1 }}>
-          <Header headerTitle={'Movie Wishlist'} />
+          <Header headerText={'Movie Wishlist'} />
           <MovieList />
         </View>
       </Provider>
