@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
+import { connect } from 'react-redux';
 import { Card, CardSection, Button } from './common';
+
+import { addMovieToWishlist } from '../actions';
 
 class MovieDetail extends Component {
   addMovieToWishlistButtonPress() {
-    const {
-      original_title,
-      overview,
-      poster_path,
-      vote_average,
-      backdrop_path,
-    } = this.props.movie;
-    console.log(this.props.movie);
+    //console.log(this.props.movie);
+    this.props.addMovieToWishlist(this.props.movie);
   }
   render() {
     const {
@@ -19,7 +16,7 @@ class MovieDetail extends Component {
       overview,
       poster_path,
       vote_average,
-      backdrop_path,
+      //backdrop_path,
     } = this.props.movie;
     const {
       headerContentStyle,
@@ -32,7 +29,7 @@ class MovieDetail extends Component {
       <Card>
         <CardSection>
           <Image
-            source={{ uri: 'https://image.tmdb.org/t/p/w342' + poster_path }}
+            source={{ uri: `https://image.tmdb.org/t/p/w342${poster_path}` }}
             style={imageStyle}
           />
         </CardSection>
@@ -74,4 +71,13 @@ const styles = {
   },
 };
 
-export default MovieDetail;
+const mapStateToProps = state => {
+  return {
+    movies: state.movies.movies,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { addMovieToWishlist }
+)(MovieDetail);

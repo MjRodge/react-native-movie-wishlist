@@ -17,9 +17,9 @@ class MovieList extends Component {
 
   loadMoreMoviesNewReleases = () => {
     this.setState({ pageCount: this.state.pageCount + 1 }, () => {
-      console.log(this.state.pageCount);
+      //console.log(this.state.pageCount);
       this.props.getMoviesNewReleases(this.state.pageCount);
-      console.log(this.props.movies);
+      //console.log(this.props.movies);
     });
   };
 
@@ -28,7 +28,7 @@ class MovieList extends Component {
       <FlatList
         data={this.props.movies}
         renderItem={({ item }) => <MovieDetail movie={item} />}
-        //keyExtractor={item => item.id.toString()}
+        keyExtractor={item => item.id.toString()}
         onEndReached={this.loadMoreMoviesNewReleases}
         onEndReachedThreshold={0.1}
       />
