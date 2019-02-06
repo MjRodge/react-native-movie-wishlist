@@ -28,7 +28,7 @@ const MovieDetail = ({ movie }) => {
       <CardSection>
         <View style={headerContentStyle}>
           <Text style={headerTextStyle}>{original_title}</Text>
-          <Text style={reviewTextStyle}>{vote_average}</Text>
+          <Text style={reviewTextStyle}>{vote_average}/10</Text>
           <Text>{overview}</Text>
         </View>
       </CardSection>
