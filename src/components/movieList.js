@@ -16,6 +16,7 @@ class MovieList extends Component {
       <FlatList
         data={this.props.movies}
         renderItem={({ item }) => <MovieDetail movie={item} />}
+        keyExtractor={item => item.id.toString()}
       />
     );
   }
