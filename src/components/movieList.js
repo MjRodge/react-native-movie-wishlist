@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import { getMoviesNewReleases } from '../actions';
 
@@ -12,15 +11,13 @@ class MovieList extends Component {
     this.props.getMoviesNewReleases();
   }
 
-  renderMovies() {
-    return this.props.movies.map(movie => (
-      <MovieDetail key={movie.id} movie={movie} />
-    ));
-  }
-
   render() {
-    //console.log(this.state);
-    return <ScrollView>{this.renderMovies()}</ScrollView>;
+    return (
+      <FlatList
+        data={this.props.movies}
+        renderItem={({ item }) => <MovieDetail movie={item} />}
+      />
+    );
   }
 }
 
