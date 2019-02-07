@@ -5,6 +5,7 @@ import {
   GET_MOVIES_NEW_RELEASES,
   GET_MOVIES_NEW_RELEASES_SUCCESS,
   ADD_MOVIE_TO_WISHLIST,
+  WISHLIST_FETCH_SUCCESS,
 } from './types';
 
 export const getMoviesNewReleases = page => {
@@ -39,6 +40,19 @@ export const addMovieToWishlist = movie => {
       .push(movie)
       .then(() => {
         dispatch({ type: ADD_MOVIE_TO_WISHLIST });
+      });
+  };
+};
+
+export const wishlistFetch = () => {
+  const { currentUser } = firebase.auth();
+
+  return dispatch => {
+    firebase
+      .database()
+      .ref(`/users/${currentUser.uid}/wishlist`)
+      .on('value', snapshot => {
+        dispatch({ type: WISHLIST_FETCH_SUCCESS, payload: snapshot.val() });
       });
   };
 };

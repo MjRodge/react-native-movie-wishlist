@@ -1,6 +1,7 @@
 import {
   GET_MOVIES_NEW_RELEASES,
   GET_MOVIES_NEW_RELEASES_SUCCESS,
+  WISHLIST_FETCH_SUCCESS,
 } from '../actions/types';
 
 const initial_state = {
@@ -20,6 +21,12 @@ export default (state = initial_state, action) => {
         loading: false,
         movies: [...state.movies, ...action.payload],
         //movies: action.payload,
+      };
+    case WISHLIST_FETCH_SUCCESS:
+      console.log(action);
+      return {
+        ...state,
+        wishlist: action.payload,
       };
     default:
       return state;
