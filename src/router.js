@@ -3,7 +3,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './components/loginForm';
 
 import MovieList from './components/movieList';
-import MyWishlist from './components/myWishlist';
+import Wishlist from './components/wishlist';
 
 const RouterComponent = () => {
   return (
@@ -18,9 +18,9 @@ const RouterComponent = () => {
             component={MovieList}
             title="Movie Listings"
             rightTitle="My List"
-            onRight={() => Actions.myWishlist()}
+            onRight={() => Actions.wishlist()}
           />
-          <Scene key="myWishlist" title="My Wishlist" component={MyWishlist} />
+          <Scene key="wishlist" title="Wishlist" component={Wishlist} />
         </Scene>
       </Scene>
     </Router>

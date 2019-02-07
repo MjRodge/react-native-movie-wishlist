@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getMoviesNewReleases } from '../actions';
+import { getMoviesNewReleases, wishlistFetch } from '../actions';
 
 import MovieDetail from './movieDetail';
 
@@ -13,6 +13,9 @@ class MovieList extends Component {
 
   componentWillMount() {
     this.props.getMoviesNewReleases(this.state.pageCount);
+  }
+  componentDidMount() {
+    this.props.wishlistFetch();
   }
 
   loadMoreMoviesNewReleases = () => {
@@ -44,5 +47,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getMoviesNewReleases }
+  { getMoviesNewReleases, wishlistFetch }
 )(MovieList);
