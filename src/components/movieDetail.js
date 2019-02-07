@@ -45,7 +45,6 @@ class MovieDetail extends Component {
           <Button onPress={this.addMovieToWishlistButtonPress.bind(this)}>
             Add to Wishlist
           </Button>
-          <Button>Already Seen</Button>
         </CardSection>
       </Card>
     );
