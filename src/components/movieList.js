@@ -30,7 +30,7 @@ class MovieList extends Component {
     return (
       <FlatList
         data={this.props.movies}
-        renderItem={({ item }) => <MovieDetail movie={item} />}
+        renderItem={({ item }) => <MovieDetail movie={item} discover />}
         keyExtractor={item => item.id.toString()}
         onEndReached={this.loadMoreMoviesNewReleases}
         onEndReachedThreshold={0.1}
