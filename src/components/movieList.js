@@ -1,30 +1,51 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
-import axios from 'axios';
+import { FlatList } from 'react-native';
+import { connect } from 'react-redux';
+
+import { getMoviesNewReleases, wishlistFetch } from '../actions';
 
 import MovieDetail from './movieDetail';
 
 class MovieList extends Component {
-  state = { movies: [] };
+  state = {
+    pageCount: 1,
+  };
 
   componentWillMount() {
-    axios
-      .get(
-        'https://api.themoviedb.org/3/movie/now_playing?api_key=fa6bde084211bd28b4ec784ac6a0acb9&language=en-US&page=1'
-      )
-      .then(response => this.setState({ movies: response.data.results }));
+    this.props.getMoviesNewReleases(this.state.pageCount);
+  }
+  componentDidMount() {
+    this.props.wishlistFetch();
   }
 
-  renderMovies() {
-    return this.state.movies.map(movie => (
-      <MovieDetail key={movie.id} movie={movie} />
-    ));
-  }
+  loadMoreMoviesNewReleases = () => {
+    this.setState({ pageCount: this.state.pageCount + 1 }, () => {
+      //console.log(this.state.pageCount);
+      this.props.getMoviesNewReleases(this.state.pageCount);
+      //console.log(this.props.movies);
+    });
+  };
 
   render() {
-    console.log(this.state);
-    return <ScrollView>{this.renderMovies()}</ScrollView>;
+    return (
+      <FlatList
+        data={this.props.movies}
+        renderItem={({ item }) => <MovieDetail movie={item} discover />}
+        keyExtractor={item => item.id.toString()}
+        onEndReached={this.loadMoreMoviesNewReleases}
+        onEndReachedThreshold={0.1}
+      />
+    );
   }
 }
 
-export default MovieList;
+const mapStateToProps = state => {
+  return {
+    movies: state.movies.movies,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getMoviesNewReleases, wishlistFetch }
+)(MovieList);
